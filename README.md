@@ -164,3 +164,11 @@ Users are redirected to their respective dashboards. Middleware protects all rou
 ## Project Credits
 
 This platform was designed and developed by **Malek Ahmad Abdel Hadi Wahdan** as part of the Orange Coding Academy final project.
+
+---
+
+## Figma link :
+https://www.figma.com/design/FLmkuhKJrTE5zhJ5eOhjc7/Untitled?node-id=0-1&t=051EaTbZFbExMB4F-1
+---
+## Schema : 
+https://dbdiagram.io/d/68236ff95b2fc4582f6da3a6
