@@ -69,18 +69,17 @@ Users are redirected to their respective dashboards. Middleware protects all rou
 
 3. **Category Management**  
    - Add/edit/delete categories  
-   - Add images and descriptions  
+   - Add images  
    - Mark featured categories  
 
 4. **Brand Management**  
    - Add/edit/delete brands  
-   - Upload logos  
-   - Include descriptions  
+  
 
 5. **Order Management**  
    - View all orders  
-   - Update order, payment, and shipping statuses  
-   - View order items and customer notes  
+   - Update order shipping statuses  
+   - View order items 
 
 6. **Shipping Methods**  
    - Add/edit/delete shipping methods  
@@ -95,7 +94,7 @@ Users are redirected to their respective dashboards. Middleware protects all rou
 ## Super Admin Capabilities
 
 - Full Admin privileges  
-- Manage Admin accounts (create, update, deactivate)  
+- Manage Admin accounts (create, update, delete)  
 
 
 ---
@@ -138,14 +137,7 @@ Users are redirected to their respective dashboards. Middleware protects all rou
 
 ---
 
-## Security Features
 
-- Password hashing  
-- Role-based access control via middleware  
-- Stripe secure payment gateway  
-- Email verification support  
-- Session and token-based authentication  
-- Input validation and sanitization  
 
 ---
 
