@@ -1,66 +1,174 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PC-Adviser – Detailed System Documentation
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Developed by **Malek Ahmad Abdel Hadi Wahdan**  
+Final Project – Orange Coding Academy
 
-## About Laravel
+PC-Adviser is an AI-integrated e-commerce platform developed as a final project at Orange Coding Academy. The platform not only offers full e-commerce functionality but also helps users choose the perfect PC setup using a chatbot powered by Hugging Face AI.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Home Page
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The main landing page includes:
+- Featured products and categories  
+- Promotional banners  
+- Quick access to the AI chatbot  
+- About section describing the platform's mission  
+- Authentication links (Login/Register)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Authentication System
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Role-Based Access Control
+Authentication is handled using Laravel Guards and middleware with three distinct user roles:
+- **User**: Regular customer  
+- **Admin**: Store manager with control over inventory and orders  
+- **Super Admin**: Has complete system control including admin management  
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Login Access
+- **User Login**: `/login`  
+- **Admin/Super Admin Login**: `/admin/login`  
 
-## Laravel Sponsors
+Users are redirected to their respective dashboards. Middleware protects all routes according to role.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## User Dashboard
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### My Profile
+- View and update name, email, password, phone, address, city  
 
-## Contributing
+### Orders
+- View past and current orders with status indicators  
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Cart & Wishlist
+- Manage items before checkout  
+- Persistent cart with quantity control  
 
-## Code of Conduct
+### Checkout
+- Stripe-powered payment system  
+- Choose from available shipping methods  
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### AI Chatbot (PC Adviser)
+- Accessible from home or dashboard  
+- Asks questions to understand user needs  
+- Recommends PCs based on preferences
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Admin Dashboard
 
-## License
+1. **Dashboard Overview**  
+  
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2. **Product Management**  
+   - Add/edit/delete products  
+   - Manage stock, pricing, brand/category, and status  
+   - Upload thumbnail and additional images  
+
+3. **Category Management**  
+   - Add/edit/delete categories  
+   - Add images and descriptions  
+   - Mark featured categories  
+
+4. **Brand Management**  
+   - Add/edit/delete brands  
+   - Upload logos  
+   - Include descriptions  
+
+5. **Order Management**  
+   - View all orders  
+   - Update order, payment, and shipping statuses  
+   - View order items and customer notes  
+
+6. **Shipping Methods**  
+   - Add/edit/delete shipping methods  
+   - Set price and estimated delivery time  
+
+7. **Reviews**  
+   - View and moderate product reviews  
+   - Approve or reject submissions  
+
+---
+
+## Super Admin Capabilities
+
+- Full Admin privileges  
+- Manage Admin accounts (create, update, deactivate)  
+
+
+---
+
+## Technical Stack
+
+- **Frontend**: Blade, HTML, CSS, JavaScript  
+- **Backend**: Laravel (PHP)  
+- **Database**: MySQL  
+- **Payment Integration**: Stripe API  
+- **AI Integration**: Hugging Face API  
+- **Security**: hashed passwords, CSRF, middleware  
+
+---
+
+## Database Schema Overview
+
+### Core Tables
+- **users**: Customer details and credentials  
+- **admins**: Admin/super admin accounts with role control  
+- **categories**: Product categories  
+- **brands**: Product brand information  
+- **products**: Product listing with stock and status  
+- **product_images**: Multiple images per product  
+- **orders**: Order summary, billing, shipping  
+- **order_items**: Individual items in each order  
+- **carts**: User’s current cart with quantity  
+- **wishlists**: User’s wishlist (composite key for uniqueness)  
+- **reviews**: User-submitted product reviews  
+- **payments**: Tracks payment method and status  
+- **shipping_methods**: Delivery options and pricing  
+
+### Key Relationships
+- **products** → categories, brands  
+- **order_items** → orders, products  
+- **orders** → users, shipping_methods  
+- **payments** → orders  
+- **reviews** → users, products  
+- **carts & wishlists** → Composite keys: (user_id, product_id)
+
+---
+
+## Security Features
+
+- Password hashing  
+- Role-based access control via middleware  
+- Stripe secure payment gateway  
+- Email verification support  
+- Session and token-based authentication  
+- Input validation and sanitization  
+
+---
+
+## How to Start Using the PC-Adviser Platform
+
+1. Clone the repo from GitHub  
+2. Run `composer install` to install dependencies  
+3. Run `php artisan migrate` to create tables  
+4. Add your `.env` file and configure DB and Stripe keys  
+5. Run `php artisan serve` to start the server  
+6. Access the platform at [http://localhost:8000](http://localhost:8000)  
+7. Admin login page: [http://localhost:8000/admin/login](http://localhost:8000/admin/login)
+
+---
+
+## Project Credits
+
+This platform was designed and developed by **Malek Ahmad Abdel Hadi Wahdan** as part of the Orange Coding Academy final project.
+
+---
+
+## Figma link :
+https://www.figma.com/design/FLmkuhKJrTE5zhJ5eOhjc7/Untitled?node-id=0-1&t=051EaTbZFbExMB4F-1
+---
+## Schema : 
+https://dbdiagram.io/d/68236ff95b2fc4582f6da3a6
