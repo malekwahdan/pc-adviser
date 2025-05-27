@@ -1,4 +1,4 @@
-<!-- Blade Template (products/index.blade.php) -->
+
 @extends('layouts.public')
 
 @section('content')
@@ -33,8 +33,8 @@
                         <div class="mb-3">
                             <label for="price-range" class="form-label">Price Range</label>
                             <div class="d-flex justify-content-between mb-2">
-                                <span>$0</span>
-                                <span>${{ $maxPrice ?? 5000 }}</span>
+                                <span>0</span>
+                                <span>{{ $maxPrice ?? 5000 }}</span>
                             </div>
                             <input type="range" class="form-range" id="price-range" name="max_price" min="0" max="{{ $maxPrice ?? 5000 }}" value="{{ request('max_price', $maxPrice ?? 5000) }}">
                         </div>
@@ -82,7 +82,7 @@
                     <p class="text-muted mb-0">Showing {{ $products->count() }} of {{ $products->total() }} products</p>
                 </div>
                 <form action="{{ route('p.index') }}" method="GET" class="d-flex">
-                    <!-- Preserve any existing filter parameters -->
+                   
                     @if(request()->has('brands'))
                         @foreach(request('brands') as $brandId)
                             <input type="hidden" name="brands[]" value="{{ $brandId }}">
@@ -117,7 +117,7 @@
                 </form>
             </div>
 
-            <!-- Rest of your products code here -->
+
 
             <!-- Products Grid -->
             <div class="row g-4">
@@ -139,11 +139,11 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     @if($product->sale_price)
                                         <div>
-                                            <span class="text-decoration-line-through text-muted">${{ number_format($product->price, 2) }}</span>
-                                            <span class="fw-bold text-danger">${{ number_format($product->sale_price, 2) }}</span>
+                                            <span class="text-decoration-line-through text-muted">JOD{{ number_format($product->price, 2) }}</span>
+                                            <span class="fw-bold text-danger">JOD {{ number_format($product->sale_price, 2) }}</span>
                                         </div>
                                     @else
-                                        <span class="fw-bold">${{ number_format($product->price, 2) }}</span>
+                                        <span class="fw-bold">JOD {{ number_format($product->price, 2) }}</span>
                                     @endif
                                     <a href="{{ route('p.show', $product->slug) }}" class="btn btn-sm btn-outline-dark">View</a>
                                 </div>

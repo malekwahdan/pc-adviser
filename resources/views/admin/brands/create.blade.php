@@ -19,22 +19,9 @@
                     @enderror
                 </div>
 
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3">{{ old('description') }}</textarea>
-                    @error('description')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
 
-                <div class="mb-3">
-                    <label for="logo" class="form-label">Logo</label>
-                    <input type="file" class="form-control @error('logo') is-invalid @enderror" id="logo" name="logo">
-                    <div class="form-text">Optional. Max 2MB. Recommended size: 200x100px</div>
-                    @error('logo')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
+
+               
 
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary">Create Brand</button>

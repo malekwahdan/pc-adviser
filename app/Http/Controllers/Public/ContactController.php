@@ -28,13 +28,13 @@ class ContactController extends Controller
 
             try {
                 Mail::raw("Message from: {$validated['name']} ({$validated['email']})\n\n{$validated['message']}", function($message) use ($validated) {
-                    $message->to(env('MAIL_FROM_ADDRESS', 'your-email@example.com'));
+                    $message->to(env('MAIL_FROM_ADDRESS', 'wahdan71@gmail.com'));
                     $message->subject("Contact Form: {$validated['subject']}");
                     $message->from(env('MAIL_FROM_ADDRESS', 'no-reply@example.com'), $validated['name']);
                     $message->replyTo($validated['email'], $validated['name']);
                 });
                 return back()->with('success', 'Thank you for your message! We will get back to you soon.');
-            } catch (\Swift_TransportException $e) {
+            } catch (\Exception  $e) {
                 return back()->with('error', 'Mail server connection error: ' . $e->getMessage())->withInput();
             } catch (\Exception $e) {
                 return back()->with('error', 'Error sending email: ' . $e->getMessage())->withInput();

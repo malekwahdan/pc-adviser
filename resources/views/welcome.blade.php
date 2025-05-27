@@ -69,16 +69,16 @@
                             <div class="placeholder-img p-3">Product Image</div>
                         @endif
                         <div class="card-body">
-                            <h5 class="card-title">{{ Str::limit($product->name, 44) }}</h5>
-                            <p class="card-text">{{ Str::limit($product->description, 60) }}</p>
+                            <h5 class="card-title">{{ Str::limit($product->name, 36) }}</h5>
+                            <p class="card-text">{{ Str::limit($product->description, 50) }}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 @if($product->sale_price)
                                     <div>
-                                        <span class="text-decoration-line-through text-muted">${{ number_format($product->price, 2) }}</span>
-                                        <span class="h5 mb-0 text-danger">${{ number_format($product->sale_price, 2) }}</span>
+                                        <span class="text-decoration-line-through text-muted">{{ number_format($product->price, 2) }}</span>
+                                        <span class="h5 mb-0 text-danger">JOD {{ number_format($product->sale_price, 2) }}</span>
                                     </div>
                                 @else
-                                    <span class="h5 mb-0">${{ number_format($product->price, 2) }}</span>
+                                    <span class="h5 mb-0">JOD {{ number_format($product->price, 2) }}</span>
                                 @endif
                                 <a href="{{ route('p.show', $product->slug) }}" class="btn btn-dark">View</a>
                             </div>

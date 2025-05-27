@@ -30,7 +30,7 @@
                 <div class="mb-3">
                     <label for="price" class="form-label">Price <span class="text-danger">*</span></label>
                     <div class="input-group">
-                        <span class="input-group-text">$</span>
+                        <span class="input-group-text">JOD</span>
                         <input type="number" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price') }}" step="0.01" min="0" required>
                         @error('price')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -46,7 +46,7 @@
                     @enderror
                 </div>
 
-               
+
 
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button type="submit" class="btn btn-primary">Save Shipping Method</button>

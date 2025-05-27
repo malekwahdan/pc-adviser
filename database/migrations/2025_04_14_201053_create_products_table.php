@@ -20,8 +20,8 @@ return new class extends Migration
             $table->decimal('sale_price', 10, 2)->nullable();
             $table->decimal('cost', 10, 2);
             $table->integer('stock_quantity');
-            $table->foreignId('brand_id')->constrained()->onDelete('cascade');
-            $table->foreignId('category_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('brand_id');
+            $table->foreignId('category_id');
             $table->enum('status', ['in_stock', 'out_of_stock', 'discontinued'])->default('in_stock');
             $table->boolean('featured')->default(false);
             $table->string('thumbnail')->nullable();

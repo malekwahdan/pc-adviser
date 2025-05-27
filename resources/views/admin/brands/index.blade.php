@@ -24,7 +24,6 @@
                     <thead>
                         <tr>
                             <th>Brand</th>
-                            <th>Description</th>
                             <th>Products</th>
                             <th>Actions</th>
                         </tr>
@@ -47,7 +46,6 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>{{ Str::limit($brand->description, 50) ?? 'N/A' }}</td>
                             <td>{{ $brand->products_count ?? 0 }}</td>
                             <td>
                                 <div class="d-flex">

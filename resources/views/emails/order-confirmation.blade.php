@@ -72,25 +72,25 @@
                 <tr>
                     <td>{{ $item->product->name }}</td>
                     <td>{{ $item->quantity }}</td>
-                    <td>${{ number_format($item->price, 2) }}</td>
-                    <td>${{ number_format($item->total, 2) }}</td>
+                    <td>JOD {{ number_format($item->price, 2) }}</td>
+                    <td>JOD {{ number_format($item->total, 2) }}</td>
                 </tr>
                 @endforeach
                 <tr>
                     <td colspan="3" style="text-align: right;"><strong>Subtotal:</strong></td>
-                    <td>${{ number_format($order->subtotal, 2) }}</td>
+                    <td>JOD{{ number_format($order->subtotal, 2) }}</td>
                 </tr>
                 <tr>
                     <td colspan="3" style="text-align: right;"><strong>Tax:</strong></td>
-                    <td>${{ number_format($order->tax, 2) }}</td>
+                    <td>JOD{{ number_format($order->tax, 2) }}</td>
                 </tr>
                 <tr>
                     <td colspan="3" style="text-align: right;"><strong>Shipping:</strong></td>
-                    <td>${{ number_format($order->shipping_cost, 2) }}</td>
+                    <td>JOD{{ number_format($order->shipping_cost, 2) }}</td>
                 </tr>
                 <tr class="total-row">
                     <td colspan="3" style="text-align: right;"><strong>Total:</strong></td>
-                    <td>${{ number_format($order->total, 2) }}</td>
+                    <td>JOD{{ number_format($order->total, 2) }}</td>
                 </tr>
             </tbody>
         </table>

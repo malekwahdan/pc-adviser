@@ -40,14 +40,14 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+
             'image' => 'nullable|image|max:2048',
-            'status' => 'sometimes|boolean',
+
             'featured' => 'boolean',
         ]);
         $validated['featured'] = $request->has('featured') ? 1 : 0;
         $validated['slug'] = Str::slug($request->name);
-        $validated['status'] = $request->has('status') ? true : false;
+
 
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('categories', 'public');
@@ -75,17 +75,17 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+
             'image' => 'nullable|image|max:2048',
-            'status' => 'sometimes|boolean',
+
             'featured' => 'boolean',
         ]);
 
         $validated['slug'] = Str::slug($request->name);
-        $validated['status'] = $request->has('status') ? true : false;
+
         $validated['featured'] = $request->has('featured') ? 1 : 0;
         if ($request->hasFile('image')) {
-            // Delete old image if exists
+           
             if ($category->image) {
                 Storage::disk('public')->delete($category->image);
             }
@@ -100,7 +100,10 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-      
+        if ($category->products()->count() > 0) {
+            return redirect()->route('categories.index')
+                ->with('error', 'Cannot delete category with associated products');
+        }
 
         // Delete image if exists
         if ($category->image) {

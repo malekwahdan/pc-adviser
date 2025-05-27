@@ -37,15 +37,12 @@ class BrandController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'logo' => 'nullable|image|max:2048',
+
         ]);
 
         $validated['slug'] = Str::slug($request->name);
 
-        if ($request->hasFile('logo')) {
-            $validated['logo'] = $request->file('logo')->store('brands', 'public');
-        }
+
 
         Brand::create($validated);
 
@@ -55,9 +52,8 @@ class BrandController extends Controller
 
     public function show(Brand $brand)
     {
-        $brand->load(['products' => function($query) {
-            $query->latest()->take(10);
-        }]);
+        $brand->load('products');
+
 
         $totalProducts = $brand->products()->count();
 
@@ -74,18 +70,12 @@ class BrandController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'logo' => 'nullable|image|max:2048',
+
         ]);
 
         $validated['slug'] = Str::slug($request->name);
 
-        if ($request->hasFile('logo')) {
-            // Delete old logo if exists
-            if ($brand->logo) {
-                Storage::disk('public')->delete($brand->logo);
-            }
-            $validated['logo'] = $request->file('logo')->store('brands', 'public');
-        }
+
 
         $brand->update($validated);
 
@@ -95,16 +85,13 @@ class BrandController extends Controller
 
     public function destroy(Brand $brand)
     {
-        // Check if brand has products
+        
         if ($brand->products()->count() > 0) {
             return redirect()->route('brands.index')
                 ->with('error', 'Cannot delete brand with associated products');
         }
 
-        // Delete logo if exists
-        if ($brand->logo) {
-            Storage::disk('public')->delete($brand->logo);
-        }
+
 
         $brand->delete();
 

@@ -10,7 +10,7 @@ use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
-  
+
     public function index(Request $request)
     {
         $adminsQuery = Admin::query();
@@ -81,14 +81,14 @@ class AdminController extends Controller
             'role' => 'required|in:admin,super_admin',
         ];
 
-        // Only validate password if provided
+
         if ($request->filled('password')) {
             $rules['password'] = 'string|min:8|confirmed';
         }
 
         $validated = $request->validate($rules);
 
-        // Only update password if provided
+
         if ($request->filled('password')) {
             $validated['password'] = Hash::make($validated['password']);
         } else {
@@ -111,16 +111,5 @@ class AdminController extends Controller
     }
 
 
-    public function sendVerificationEmail(Admin $admin)
-    {
-        if ($admin->hasVerifiedEmail()) {
-            return redirect()->route('admins.show', $admin)
-                ->with('info', 'Admin email is already verified.');
-        }
-
-        $admin->sendEmailVerificationNotification();
-
-        return redirect()->route('admins.show', $admin)
-            ->with('success', 'Verification email has been sent.');
-    }
+  
 }

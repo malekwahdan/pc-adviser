@@ -92,7 +92,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/checkout/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('checkout.apply-coupon');
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
-    Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success'); 
+    Route::get('/checkout/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');
     Route::get('/checkout/stripe/success/{order}', [CheckoutController::class, 'stripeSuccess'])->name('checkout.stripe.success');
     Route::get('/checkout/stripe/cancel/{order}', [CheckoutController::class, 'stripeCancel'])->name('checkout.stripe.cancel');
 
@@ -105,7 +105,17 @@ Route::post('/contact', [ContactController::class, 'send'])->name('contact.send'
 
 });
 
+
+
 // Admin routes
+
+Route::prefix('admin')->middleware('SuperAdmin')->group(function () {
+
+    Route::resource('/admins', AdminController::class);
+
+});
+
+
 Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::post('/logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
@@ -117,7 +127,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     // Resources
     Route::resource('/products', ProductController::class);
     Route::resource('/users', UserController::class);
-    Route::resource('/admins', AdminController::class);
+    // Route::resource('/admins', AdminController::class);
     Route::resource('/categories', CategoryController::class);
     Route::resource('/brands', BrandController::class);
     Route::resource('/shipping-methods', ShippingMethodController::class);

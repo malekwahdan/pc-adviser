@@ -107,14 +107,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="col-12">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="sameAddress" name="billing_same">
-                                            <label class="form-check-label" for="sameAddress">
-                                                Billing address is the same
-                                            </label>
-                                        </div>
-                                    </div>
+                                 
                                 </div>
                             </div>
                         </div>
@@ -133,7 +126,7 @@
                                             <strong>{{ $method->name }}</strong>
                                             <p class="text-muted mb-0 small">{{ $method->estimated_delivery_time }}</p>
                                         </div>
-                                        <span>${{ number_format($method->price, 2) }}</span>
+                                        <span>JOD {{ number_format($method->price, 2) }}</span>
                                     </label>
                                 </div>
                                 @endforeach
@@ -161,7 +154,7 @@
                                 </div>
 
                                 <!-- Other Payment Methods -->
-                                <div class="border-top pt-3">
+                                {{-- <div class="border-top pt-3">
                                     <div class="form-check mb-2">
                                         <input class="form-check-input payment-method" type="radio" name="payment_method" id="paypal" value="paypal">
                                         <label class="form-check-label d-flex align-items-center" for="paypal">
@@ -182,7 +175,7 @@
                                             <i class="bi bi-apple me-2"></i> Apple Pay
                                         </label>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -205,7 +198,7 @@
                                         <h6 class="mb-0">{{ $item['name'] }}</h6>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <span class="text-muted">Qty: {{ $item['quantity'] }}</span>
-                                            <span>${{ number_format($item['price'], 2) }}</span>
+                                            <span>JOD {{ number_format($item['price'], 2) }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -217,23 +210,23 @@
                                 <div class="border-top pt-3">
                                     <div class="d-flex justify-content-between mb-2">
                                         <span>Subtotal</span>
-                                        <span id="subtotal">${{ number_format($subtotal, 2) }}</span>
+                                        <span id="subtotal">JOD{{ number_format($subtotal, 2) }}</span>
                                     </div>
                                     <div class="d-flex justify-content-between mb-2">
                                         <span>Shipping</span>
-                                        <span id="shipping">${{ number_format($shippingCost, 2) }}</span>
+                                        <span id="shipping">JOD{{ number_format($shippingCost, 2) }}</span>
                                     </div>
                                     <div class="d-flex justify-content-between mb-2">
                                         <span>Tax</span>
-                                        <span id="tax">${{ number_format($tax, 2) }}</span>
+                                        <span id="tax">JOD{{ number_format($tax, 2) }}</span>
                                     </div>
                                     <div class="d-flex justify-content-between mb-2 d-none" id="discount-row">
                                         <span>Discount</span>
-                                        <span id="discount">$0.00</span>
+                                        <span id="discount">JOD0.00</span>
                                     </div>
                                     <div class="d-flex justify-content-between fw-bold mb-0">
                                         <span>Total</span>
-                                        <span id="total">${{ number_format($total, 2) }}</span>
+                                        <span id="total">JOD{{ number_format($total, 2) }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -263,19 +256,19 @@
         const shippingPrice = parseFloat(selectedMethod.dataset.price);
 
         const shippingElement = document.getElementById('shipping');
-        shippingElement.textContent = '$' + shippingPrice.toFixed(2);
+        shippingElement.textContent = 'JOD' + shippingPrice.toFixed(2);
 
         calculateTotal();
     }
 
     function calculateTotal() {
-        const subtotal = parseFloat(document.getElementById('subtotal').textContent.replace('$', ''));
-        const shipping = parseFloat(document.getElementById('shipping').textContent.replace('$', ''));
-        const tax = parseFloat(document.getElementById('tax').textContent.replace('$', ''));
+        const subtotal = parseFloat(document.getElementById('subtotal').textContent.replace('JOD', ''));
+        const shipping = parseFloat(document.getElementById('shipping').textContent.replace('JOD', ''));
+        const tax = parseFloat(document.getElementById('tax').textContent.replace('JOD', ''));
 
         const total = subtotal + shipping + tax;
 
-        document.getElementById('total').textContent = '$' + total.toFixed(2);
+        document.getElementById('total').textContent = 'JOD' + total.toFixed(2);
     }
 });
 </script>

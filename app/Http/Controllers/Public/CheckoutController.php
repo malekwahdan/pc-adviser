@@ -129,14 +129,12 @@ class CheckoutController extends Controller
                 'subtotal' => $subtotal,
                 'tax' => $tax,
                 'shipping_cost' => $shippingMethod->price,
-                'discount' => 0, // No discount
                 'total' => $total,
                 'payment_status' => 'pending',
                 'shipping_status' => 'pending',
                 'shipping_method_id' => $shippingMethod->id,
                 'payment_method' => $request->payment_method,
                 'shipping_address' => $request->street_address,
-                'notes' => $request->notes
             ]);
 
             // Create order items
@@ -161,7 +159,7 @@ class CheckoutController extends Controller
 
             DB::commit();
 
-            // If payment method is card, redirect to Stripe
+
             if ($request->payment_method === 'card') {
                 return $this->processStripePayment($order, $orderItems, $shippingMethod, $tax);
             } else {
@@ -222,7 +220,7 @@ class CheckoutController extends Controller
         }
 
         try {
-            // Set your Stripe API key
+
             Stripe::setApiKey(config('services.stripe.secret'));
 
             // Create a Stripe Checkout Session
@@ -242,7 +240,7 @@ class CheckoutController extends Controller
             return redirect($session->url);
 
         } catch (ApiErrorException $e) {
-            // Handle Stripe API errors
+
             DB::rollBack();
             return back()->with('error', 'Payment error: ' . $e->getMessage());
         }
@@ -258,7 +256,7 @@ class CheckoutController extends Controller
         }
 
         try {
-            // Verify payment with Stripe
+            
             Stripe::setApiKey(config('services.stripe.secret'));
             $session = StripeSession::retrieve($sessionId);
 

@@ -86,21 +86,21 @@
                             @endif
                         @endfor
                     </div>
-                    <span class="text-muted">({{ $product->reviews->count() }} reviews)</span>
+                    <span class="text-muted"> reviews</span>
                 </div>
             </div>
 
             <!-- Price -->
             <div class="mb-3">
                 @if($product->sale_price)
-                    <span class="h3 text-danger fw-bold">${{ number_format($product->sale_price, 2) }}</span>
+                    <span class="h3 text-danger fw-bold">JOD {{ number_format($product->sale_price, 2) }}</span>
                     <span class="text-decoration-line-through text-muted ms-2">${{ number_format($product->price, 2) }}</span>
                     @php
                         $savingsPercent = round((($product->price - $product->sale_price) / $product->price) * 100);
                     @endphp
                     <span class="badge bg-danger ms-2">Save {{ $savingsPercent }}%</span>
                 @else
-                    <span class="h3 fw-bold">${{ number_format($product->price, 2) }}</span>
+                    <span class="h3 fw-bold">JOD{{ number_format($product->price, 2) }}</span>
                 @endif
             </div>
 
@@ -175,31 +175,20 @@
     <div class="row mt-5">
         <div class="col-12">
             <ul class="nav nav-tabs" id="productTabs" role="tablist">
+
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Description</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Reviews ({{ $product->reviews->count() }})</button>
+                    <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="true">Reviews </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="shipping-tab" data-bs-toggle="tab" data-bs-target="#shipping" type="button" role="tab" aria-controls="shipping" aria-selected="false">Shipping</button>
                 </li>
             </ul>
             <div class="tab-content p-4 border border-top-0 rounded-bottom" id="productTabsContent">
-                <!-- Description Tab -->
-                <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                    <div class="row">
-                        <div class="col-lg-8">
 
 
-                                <p class="text-wrap" style="max-width: 100%; overflow-wrap: break-word;">{{ $product->description }}</p>
-
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Reviews Tab -->
-                <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                <div class="tab-pane fade show" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
                     <!-- Review Summary -->
                     <div class="mb-4">
                         <div class="row align-items-center">
@@ -216,7 +205,7 @@
                                         @endif
                                     @endfor
                                 </div>
-                                <p class="text-muted">Based on {{ $product->reviews->count() }} reviews</p>
+                                <p class="text-muted">Based on  reviews</p>
                             </div>
                         </div>
                     </div>
@@ -228,9 +217,7 @@
                                 <div class="review-item p-3 mb-3 border-bottom">
                                     <div class="d-flex justify-content-between align-items-center mb-2">
                                         <div class="d-flex align-items-center">
-                                            <div class="avatar me-2">
-                                                <img src="https://via.placeholder.com/50" class="rounded-circle" width="50" height="50" alt="{{ $review->user->name }}">
-                                            </div>
+
                                             <div>
                                                 <h6 class="mb-0">{{ $review->user->name }}</h6>
                                                 <small class="text-muted">{{ $review->created_at->format('M d, Y') }}</small>
@@ -323,18 +310,14 @@
                                         <tr>
                                             <td>{{ $method->name }}</td>
                                             <td>{{ $method->estimated_delivery_time }}</td>
-                                            <td>${{ number_format($method->price, 2) }}</td>
+                                            <td>JOD{{ number_format($method->price, 2) }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
 
-                        <div class="shipping-info mt-4">
-                            <h5>Shipping Policy</h5>
-                            <p>Orders are typically processed within 1-2 business days. Shipping times vary by location and method selected at checkout.</p>
-                            <p>Free shipping on orders over $100 within the continental US.</p>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -359,10 +342,10 @@
                                 @if($relatedProduct->sale_price)
                                     <div>
                                         <span class="text-decoration-line-through text-muted">${{ number_format($relatedProduct->price, 2) }}</span>
-                                        <span class="fw-bold text-danger">${{ number_format($relatedProduct->sale_price, 2) }}</span>
+                                        <span class="fw-bold text-danger">JOD {{ number_format($relatedProduct->sale_price, 2) }}</span>
                                     </div>
                                 @else
-                                    <span class="fw-bold">${{ number_format($relatedProduct->price, 2) }}</span>
+                                    <span class="fw-bold">JOD {{ number_format($relatedProduct->price, 2) }}</span>
                                 @endif
                                 <a href="{{ route('p.show', $relatedProduct->slug) }}" class="btn btn-sm btn-outline-dark">View</a>
                             </div>
@@ -376,7 +359,7 @@
 
 
 <script>
-    // Function to change main product image
+   
     function changeMainImage(src) {
         document.getElementById('main-product-img').src = src;
     }

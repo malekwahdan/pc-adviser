@@ -64,31 +64,7 @@
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">Account Security</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row mb-3">
-                        <div class="col-md-3 fw-bold">Email Verification</div>
-                        <div class="col-md-9">
-                            @if($user->email_verified_at)
-                                <span class="badge bg-success">Verified on {{ $user->email_verified_at->format('M d, Y') }}</span>
-                            @else
-                                <span class="badge bg-warning text-dark">Not verified</span>
-                                <a href="#" class="btn btn-sm btn-outline-primary ms-2">Send verification email</a>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-3 fw-bold">Password</div>
-                        <div class="col-md-9">
-                            <a href="{{ route('users.edit', $user) }}" class="btn btn-sm btn-outline-secondary">Reset password</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>

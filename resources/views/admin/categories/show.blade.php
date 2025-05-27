@@ -33,12 +33,9 @@
                     <h5 class="card-title mb-0">Category Information</h5>
                 </div>
                 <div class="card-body">
-                    <div class="mb-3">
-                        <h6 class="fw-bold">Description</h6>
-                        <p>{{ $category->description ?? 'No description available' }}</p>
-                    </div>
+                  
 
-                
+
 
                     <div class="row">
                         <div class="col-md-6 mb-3">

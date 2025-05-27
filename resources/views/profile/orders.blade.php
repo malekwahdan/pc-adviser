@@ -20,15 +20,10 @@
                     <a href="{{ route('profile.orders') }}" class="list-group-item list-group-item-action active">
                         <i class="bi bi-box-seam me-2"></i> Orders
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a href="{{ route('wishlist.index') }}" class="list-group-item list-group-item-action">
                         <i class="bi bi-heart me-2"></i> Wishlist
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <i class="bi bi-gear me-2"></i> Settings
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <i class="bi bi-book me-2"></i> Address Book
-                    </a>
+
                 </div>
             </div>
         </div>

@@ -29,7 +29,7 @@ class UserController extends Controller
 
         $users = $usersQuery->orderBy('created_at', 'desc')->paginate(10);
 
-        
+
 
 
         return view('admin.users.index', compact('users'));
@@ -91,14 +91,14 @@ class UserController extends Controller
 
         ];
 
-        // Only validate password if provided
+
         if ($request->filled('password')) {
             $rules['password'] = 'string|min:8|confirmed';
         }
 
         $validated = $request->validate($rules);
 
-        // Only update password if provided
+
         if ($request->filled('password')) {
             $validated['password'] = Hash::make($validated['password']);
         } else {
@@ -121,16 +121,4 @@ class UserController extends Controller
     }
 
 
-    public function sendVerificationEmail(User $user)
-    {
-        if ($user->hasVerifiedEmail()) {
-            return redirect()->route('users.show', $user)
-                ->with('info', 'User email is already verified.');
-        }
-
-        $user->sendEmailVerificationNotification();
-
-        return redirect()->route('users.show', $user)
-            ->with('success', 'Verification email has been sent.');
-    }
 }

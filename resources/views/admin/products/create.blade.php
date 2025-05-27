@@ -52,11 +52,7 @@
                             @error('images')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                            <small class="text-muted">First image will be used as thumbnail</small>
-                            <div class="mt-2 d-flex flex-wrap" id="image-previews">
-                                <img src="https://via.placeholder.com/300x300.png?text=No+Image" class="img-thumbnail" style="max-height: 100px;">
-
-                            </div>
+                  
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -66,11 +62,7 @@
                             @error('images')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                            <small class="text-muted">First image will be used as thumbnail</small>
-                            <div class="mt-2 d-flex flex-wrap" id="image-previews">
-                                <img src="https://via.placeholder.com/300x300.png?text=No+Image" class="img-thumbnail" style="max-height: 100px;">
 
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -112,7 +104,7 @@
                 <div class="row mb-3">
                     <div class="col-md-3">
                         <div class="mb-3">
-                            <label for="price" class="form-label">Regular Price ($) <span class="text-danger">*</span></label>
+                            <label for="price" class="form-label">Regular Price  <span class="text-danger">*</span></label>
                             <input type="number" step="0.01" min="0" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price') }}" required>
                             @error('price')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -122,7 +114,7 @@
 
                     <div class="col-md-3">
                         <div class="mb-3">
-                            <label for="sale_price" class="form-label">Sale Price ($)</label>
+                            <label for="sale_price" class="form-label">Sale Price </label>
                             <input type="number" step="0.01" min="0" class="form-control @error('sale_price') is-invalid @enderror" id="sale_price" name="sale_price" value="{{ old('sale_price') }}">
                             @error('sale_price')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -132,7 +124,7 @@
 
                     <div class="col-md-3">
                         <div class="mb-3">
-                            <label for="cost" class="form-label">Cost ($) <span class="text-danger">*</span></label>
+                            <label for="cost" class="form-label">Cost  <span class="text-danger">*</span></label>
                             <input type="number" step="0.01" min="0" class="form-control @error('cost') is-invalid @enderror" id="cost" name="cost" value="{{ old('cost') }}" required>
                             @error('cost')
                                 <div class="invalid-feedback">{{ $message }}</div>

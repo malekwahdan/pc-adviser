@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-   
+
 
 
     public function index(Request $request)
@@ -24,24 +24,24 @@ class ProductController extends Controller
     // Get max price for the price filter
     $maxPrice = Product::max('price');
 
-    // Start building the query
+
     $query = Product::query()->where('status', 'in_stock');
 
-    // Store active category for display
+
     $activeCategory = null;
 
-    // Check if coming from category link (using slug)
+
     if ($request->has('category')) {
         $categorySlug = $request->category;
 
-        // Find the category by slug
+
         $category = Category::where('slug', $categorySlug)->first();
 
         if ($category) {
-            // Filter products by this category
+
             $query->where('category_id', $category->id);
 
-            // Store active category
+
             $activeCategory = $category;
         }
     }
@@ -95,12 +95,12 @@ class ProductController extends Controller
                 break;
         }
     } else {
-        // Default sorting
+
         $query->orderBy('featured', 'desc')
               ->orderBy('stock_quantity', 'desc');
     }
 
-    // Get paginated results
+  
     $products = $query->paginate(9);
 
     return view('products.index', [

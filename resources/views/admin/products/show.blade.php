@@ -34,10 +34,10 @@
 
                     <div class="d-flex justify-content-center align-items-center mb-3">
                         @if($product->sale_price)
-                            <span class="text-decoration-line-through text-muted me-2">${{ number_format($product->price, 2) }}</span>
-                            <span class="fs-4 text-danger">${{ number_format($product->sale_price, 2) }}</span>
+                            <span class="text-decoration-line-through text-muted me-2">JOD{{ number_format($product->price, 2) }}</span>
+                            <span class="fs-4 text-danger">JOD{{ number_format($product->sale_price, 2) }}</span>
                         @else
-                            <span class="fs-4">${{ number_format($product->price, 2) }}</span>
+                            <span class="fs-4">JOD{{ number_format($product->price, 2) }}</span>
                         @endif
                     </div>
 
@@ -71,18 +71,18 @@
                         </div>
                         <div class="col-md-4">
                             <p class="mb-1 text-muted">Product Cost</p>
-                            <p class="fw-bold">${{ number_format($product->cost, 2) }}</p>
+                            <p class="fw-bold">JOD{{ number_format($product->cost, 2) }}</p>
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-4">
                             <p class="mb-1 text-muted">Regular Price</p>
-                            <p class="fw-bold">${{ number_format($product->price, 2) }}</p>
+                            <p class="fw-bold">JOD{{ number_format($product->price, 2) }}</p>
                         </div>
                         <div class="col-md-4">
                             <p class="mb-1 text-muted">Sale Price</p>
-                            <p class="fw-bold">{{ $product->sale_price ? '$'.number_format($product->sale_price, 2) : 'N/A' }}</p>
+                            <p class="fw-bold">{{ $product->sale_price ? 'JOD'.number_format($product->sale_price, 2) : 'N/A' }}</p>
                         </div>
                         <div class="col-md-4">
                             <p class="mb-1 text-muted">Profit Margin</p>

@@ -55,13 +55,9 @@
                             </form>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">{{ $item->product->name }}</h5>
-                            @if($item->product->specifications)
-                                <p class="text-muted small mb-2">
-                                    {{ $item->product->specifications }}
-                                </p>
-                            @endif
-                            <p class="fw-bold mb-2">${{ number_format($item->product->price, 2) }}</p>
+                            <h5 class="card-title">{{ Str::limit($item->product->name, 40) }}</h5>
+
+                            <p class="fw-bold mb-2">JOD {{ number_format($item->product->price, 2) }}</p>
                             <p class="mb-3">
                                 @if($item->product->stock_quantity > 0)
                                     <span class="text-success">In Stock</span>

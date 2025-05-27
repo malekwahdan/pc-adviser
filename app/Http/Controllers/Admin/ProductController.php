@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
+use Illuminate\Support\Facades\Log;
 
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class ProductController extends Controller
      * Display a listing of the products.
      */
     public function index(Request $request)
-    {
+    {   $categories = Category::all();
         $query = Product::with(['category', 'brand']);
 
         // Apply search
@@ -29,18 +30,10 @@ class ProductController extends Controller
                   ->orWhere('description', 'like', "%{$search}%");
         }
 
-        // Apply category filter
-        if ($request->has('category') && $request->category) {
-            $query->where('category_id', $request->category);
-        }
 
-        // Apply sorting
-        $sort = $request->get('sort', 'created_at');
-        $direction = $request->get('direction', 'desc');
-        $query->orderBy($sort, $direction);
 
         $products = $query->paginate(10);
-        $categories = Category::all();
+
 
         return view('admin.products.index', compact('products', 'categories'));
     }
@@ -87,11 +80,13 @@ class ProductController extends Controller
 
         if ($request->hasFile('thumbnail')) {
             $validated['thumbnail'] = $request->file('thumbnail')->store('products', 'public');
-        } else if ($request->hasFile('images') && count($request->file('images')) > 0) {
+        }
+         if ($request->hasFile('images') && count($request->file('images')) > 0) {
 
-            $firstImage = $request->file('images')[0];
+            $firstImage = $request->file('thumbnail');
             $validated['thumbnail'] = $firstImage->store('products', 'public');
         }
+
 
         // Create the product
         $product = Product::create($validated);
@@ -158,22 +153,22 @@ public function update(Request $request, Product $product)
     DB::beginTransaction();
 
     try {
-        // Handle featured checkbox (fix: use boolean casting)
+
         $validated['featured'] = $request->has('featured') ? true : false;
 
-        // Handle thumbnail upload
+
         if ($request->hasFile('thumbnail')) {
-            // Delete old thumbnail if exists
+
             if ($product->thumbnail) {
                 Storage::disk('public')->delete($product->thumbnail);
             }
             $validated['thumbnail'] = $request->file('thumbnail')->store('products', 'public');
         }
 
-        // Update product
+
         $product->update($validated);
 
-        // Handle new images upload
+
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $path = $image->store('products', 'public');
@@ -181,7 +176,7 @@ public function update(Request $request, Product $product)
             }
         }
 
-        // Commit transaction
+
         DB::commit();
 
         return redirect()
@@ -189,7 +184,7 @@ public function update(Request $request, Product $product)
             ->with('success', 'Product updated successfully!');
 
     } catch (\Exception $e) {
-        // Rollback transaction on error
+
         DB::rollBack();
 
         return back()
@@ -201,17 +196,24 @@ public function update(Request $request, Product $product)
 
 
 
-    /**
-     * Remove the specified product from storage.
-     */
+
     public function destroy(Product $product)
     {
-        // Delete associated images
+        if ($product->orderItems()->exists()) {
+    return back()->with('error', 'Cannot delete product linked to orders.');
+}
+
+       
+
         foreach ($product->images as $image) {
+              if ($image->image_path) {
             Storage::disk('public')->delete($image->image_path);
+        }
             $image->delete();
         }
+        if ($product->thumbnail) {
         Storage::disk('public')->delete($product->thumbnail);
+    }
 
 
 
@@ -222,7 +224,7 @@ public function update(Request $request, Product $product)
             ->with('success', 'Product deleted successfully.');
     }
 
-   
+
 
 
 }

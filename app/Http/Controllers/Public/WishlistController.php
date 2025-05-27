@@ -54,9 +54,9 @@ class WishlistController extends Controller
      */
     public function remove(Wishlist $wishlist)
     {
-        // Ensure this wishlist item belongs to the authenticated user
+       
         if ($wishlist->user_id !== Auth::id()) {
-            abort(403);
+            abort(404);
         }
 
         $wishlist->delete();
@@ -74,6 +74,6 @@ class WishlistController extends Controller
         return redirect()->route('wishlist.index')->with('success', 'Your wishlist has been cleared.');
     }
 
-   
+
 
 }

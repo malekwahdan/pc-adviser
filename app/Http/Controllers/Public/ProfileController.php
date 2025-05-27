@@ -73,12 +73,12 @@ class ProfileController extends Controller
     }
     public function show(Order $order)
 {
-    // Check if the order belongs to the authenticated user
+
     if ($order->user_id !== Auth::id()) {
         abort(404, 'Unauthorized action.');
     }
 
-    // Load related data for the order
+   
     $order->load(['orderItems.product', 'payment']);
 
     return view('profile.order-details', compact('order'));

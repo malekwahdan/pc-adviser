@@ -24,9 +24,9 @@ class ReviewController extends Controller
             'rating' => $validated['rating'],
             'title' => $validated['title'],
             'comment' => $validated['comment'],
-            'status' => 'pending', // Or 'approved' depending on your logic
+            'status' => 'pending', 
         ]);
 
-        return redirect()->back()->with('success', 'Review submitted and awaiting approval!');
+        return redirect()->back()->with('success', 'Review submitted');
     }
 }

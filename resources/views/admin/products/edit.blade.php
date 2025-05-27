@@ -56,7 +56,7 @@
                             <small class="text-muted">Add additional images (existing images will be preserved)</small>
 
                             <div class="mt-2 d-flex flex-wrap">
-                           
+
                                 @foreach($product->images as $image)
   <div class="position-relative me-2 mb-2">
     <img src="{{ asset('storage/'.$image->image_path) }}" class="img-thumbnail" style="max-height: 100px;">
@@ -109,7 +109,7 @@
                 <div class="row mb-3">
                     <div class="col-md-3">
                         <div class="mb-3">
-                            <label for="price" class="form-label">Regular Price ($) <span class="text-danger">*</span></label>
+                            <label for="price" class="form-label">Regular Price <span class="text-danger">*</span></label>
                             <input type="number" step="0.01" min="0" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price', $product->price) }}" required>
                             @error('price')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -119,7 +119,7 @@
 
                     <div class="col-md-3">
                         <div class="mb-3">
-                            <label for="sale_price" class="form-label">Sale Price ($)</label>
+                            <label for="sale_price" class="form-label">Sale Price </label>
                             <input type="number" step="0.01" min="0" class="form-control @error('sale_price') is-invalid @enderror" id="sale_price" name="sale_price" value="{{ old('sale_price', $product->sale_price) }}">
                             @error('sale_price')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -129,7 +129,7 @@
 
                     <div class="col-md-3">
                         <div class="mb-3">
-                            <label for="cost" class="form-label">Cost ($) <span class="text-danger">*</span></label>
+                            <label for="cost" class="form-label">Cost <span class="text-danger">*</span></label>
                             <input type="number" step="0.01" min="0" class="form-control @error('cost') is-invalid @enderror" id="cost" name="cost" value="{{ old('cost', $product->cost) }}" required>
                             @error('cost')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -187,9 +187,7 @@
                 </div>
 
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="reset" class="btn btn-outline-secondary me-md-2">
-                        <i class="bi bi-arrow-counterclockwise"></i> Reset
-                    </button>
+                   
                     <button type="submit" class="btn btn-primary">
                         <i class="bi bi-save"></i> Update Product
                     </button>

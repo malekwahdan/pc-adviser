@@ -20,13 +20,11 @@ return new class extends Migration
             $table->decimal('subtotal', 10, 2);
             $table->decimal('tax', 10, 2)->default(0);
             $table->decimal('shipping_cost', 10, 2)->default(0);
-            $table->decimal('discount', 10, 2)->default(0);
             $table->enum('payment_status', ['paid', 'pending', 'failed'])->default('pending');
             $table->enum('shipping_status', ['pending', 'processing', 'shipped', 'delivered'])->default('pending');
             $table->foreignId('shipping_method_id')->nullable()->constrained()->onDelete('set null');
             $table->string('payment_method')->nullable();
             $table->text('shipping_address');
-            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

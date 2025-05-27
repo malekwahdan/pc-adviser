@@ -239,7 +239,7 @@
                                         <span class="small">Product Image</span>
                                     @endif
                                 </div>
-                                <h5 class="mb-1">{{ $product->name }}</h5>
+                                <h5 class="mb-1">{{ Str::limit($product->name, 33) }}</h5>
                                 <p class="text-muted small mb-2">{{ Str::limit($product->description, 40) }}</p>
                                 <p class="fw-bold mb-3">${{ number_format($product->getCurrentPrice(), 2) }}</p>
                                 <form action="{{ route('cart.add') }}" method="POST">

@@ -13,14 +13,14 @@
                     <div class="col-md-8">
                         <input type="text" class="form-control" id="searchProducts" name="search" placeholder="Search products..." value="{{ request('search') }}">
                     </div>
-                    <div class="col-md-4">
+                    {{-- <div class="col-md-4">
                         <select class="form-select" id="categoryFilter" name="category" onchange="document.getElementById('productFilterForm').submit()">
                             <option value="">All Categories</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="row mb-3">
@@ -61,10 +61,10 @@
                             <td>{{ $product->category?->name ?? 'N/A' }}</td>
                             <td>
                                 @if($product->sale_price)
-                                    <span class="text-decoration-line-through text-muted">${{ number_format($product->price, 2) }}</span>
-                                    <span class="text-danger">${{ number_format($product->sale_price, 2) }}</span>
+                                    <span class="text-decoration-line-through text-muted">JOD{{ number_format($product->price, 2) }}</span>
+                                    <span class="text-danger">JOD{{ number_format($product->sale_price, 2) }}</span>
                                 @else
-                                    ${{ number_format($product->price, 2) }}
+                                    JOD{{ number_format($product->price, 2) }}
                                 @endif
                             </td>
                             <td>

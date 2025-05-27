@@ -19,12 +19,12 @@ class CartController extends Controller
 
         $product = Product::findOrFail($request->product_id);
 
-        // Check if quantity is valid
+
         if ($request->quantity > $product->stock_quantity) {
             return back()->with('error', 'The requested quantity is not available.');
         }
 
-        // Find existing cart item or create new one
+
         $cart = Cart::updateOrCreate(
             [
                 'user_id' => Auth::id(),
@@ -69,12 +69,12 @@ class CartController extends Controller
             'quantity' => 'required|integer|min:1',
         ]);
 
-       
+
         if ($cart->user_id !== Auth::id()) {
             abort(403);
         }
 
-        // Check if quantity is valid
+
         if ($request->quantity > $cart->product->stock_quantity) {
             return back()->with('error', 'The requested quantity is not available.');
         }
@@ -88,7 +88,7 @@ class CartController extends Controller
 
     public function remove(Cart $cart)
     {
-        // Make sure the cart belongs to the user
+        
         if ($cart->user_id !== Auth::id()) {
             abort(403);
         }

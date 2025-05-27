@@ -12,7 +12,7 @@ class ChatbotController extends Controller
     public function processMessage(Request $request)
     {
         $userMessage = $request->input('message');
-       
+
 
         try {
             // Get product data
@@ -93,10 +93,7 @@ Available PCs: " . json_encode($products, JSON_PRETTY_PRINT) . "
 
 
 
-                if (env('OPENAI_API_KEY')) {
 
-                    return $this->getOpenAIResponse($userMessage, $products);
-                }
 
                 return response()->json([
                     'response' => "I'm sorry, I couldn't process your request. Here are some options that might interest you:\n\n" .
@@ -113,87 +110,23 @@ Available PCs: " . json_encode($products, JSON_PRETTY_PRINT) . "
     }
 
 
-    private function getOpenAIResponse($userMessage, $products)
-    {
-        try {
-            $response = Http::withOptions([
-                'verify' => false
-            ])->withHeaders([
-                'Authorization' => 'Bearer ' . env('OPENAI_API_KEY'),
-                'Content-Type' => 'application/json',
-            ])->post('https://api.openai.com/v1/chat/completions', [
-                'model' => env('OPENAI_MODEL', 'gpt-3.5-turbo'),
-                'messages' => [
-                    [
-                        'role' => 'system',
-                        'content' => 'You are a helpful PC sales assistant. Recommend suitable products based on customer needs. For each product recommendation, put the product name in square brackets [like this] so it can be made clickable. Be concise and specific.'
-                    ],
-                    [
-                        'role' => 'user',
-                        'content' => "The customer said: \"$userMessage\"\n\nAvailable products: " . json_encode($products)
-                    ]
-                ],
-                'temperature' => 0.7,
-                'max_tokens' => 500
-            ]);
 
-            if ($response->successful()) {
-                $aiResponse = $response->json()['choices'][0]['message']['content'];
 
-                $aiResponse = $this->makeProductNamesClickable($aiResponse, $products);
-                return response()->json(['response' => $aiResponse]);
-            } else {
-
-                return response()->json([
-                    'response' => "I'm sorry, I couldn't process your request. Here are some options that might interest you:\n\n" .
-                    $this->getFallbackRecommendations($products)
-                ]);
-            }
-        } catch (\Exception $e) {
-
-            return response()->json([
-                'response' => "Sorry for the inconvenience. Here are some products that might match your needs:\n\n" .
-                $this->getFallbackRecommendations($products)
-            ]);
-        }
-    }
 
 
 private function makeProductNamesClickable($response, $products)
 {
-    return preg_replace_callback('/\[([^\]]+)\]/', function ($matches) use ($products) {
-        $aiName = strtolower($matches[1]);
-
-
-        $product = $products->first(function ($item) use ($aiName) {
-            $productName = strtolower($item['name']);
-
-
-            if (stripos($productName, $aiName) !== false) {
-                return true;
-            }
-
-
-            $aiKeywords = explode(' ', preg_replace('/[^a-zA-Z0-9 ]/', '', $aiName));
-            $matchCount = 0;
-            foreach ($aiKeywords as $keyword) {
-                if (strlen($keyword) > 2 && str_contains($productName, $keyword)) {
-                    $matchCount++;
-                }
-            }
-
-
-            return $matchCount >= 3;
-        });
+    return preg_replace_callback('/\[([^\]]+)\]\s*\(ID:\s*(\d+)\)/i', function ($matches) use ($products) {
+        $productId = (int)$matches[2];
+        $product = $products->firstWhere('id', $productId);
 
         if ($product) {
-            return '<a href="' . $product['url'] . '" class="product-link">' . $matches[1] . '</a>';
+            return '<a href="' . $product['url'] . '" class="product-link">' . e($matches[1]) . '</a>';
         }
 
-        return $matches[0];
+        return $matches[0]; // fallback to original if not found
     }, $response);
 }
-
 
 
     /**
